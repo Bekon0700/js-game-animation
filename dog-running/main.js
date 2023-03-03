@@ -13,22 +13,79 @@ dogImg.src = './shadow_dog.png';
 const spriteWidth = 573;
 const spriteHeight = 523;
 
-let frameX = 0;
-let frameY = 9;
-
 // Game frame controller
 let gameFrame = 0;
 let gameStagger = 5;
 
 // sprite info object
-const dogFrameList = [7, 7, 7, 9, 11, 5, 7, 7, 12, 4]
+const dogFrameList = [
+    {
+        name: 'idle',
+        frameCount: 7
+    },
+    {
+        name: 'jump',
+        frameCount: 7
+    },
+    {
+        name: 'fall',
+        frameCount: 7
+    },
+    {
+        name: 'run',
+        frameCount: 9
+    },
+    {
+        name: 'dizzy',
+        frameCount: 11
+    },
+    {
+        name: 'sit',
+        frameCount: 5
+    },
+    {
+        name: 'roll',
+        frameCount: 7
+    },
+    {
+        name: 'bite',
+        frameCount: 7
+    },
+    {
+        name: 'KO',
+        frameCount: 12
+    },
+    {
+        name: 'gethit',
+        frameCount: 4
+    },
+];
+
+const spriteAnimationList = {};
+dogFrameList.forEach((val, ind) => {
+    let frames = {
+        loc: []
+    };
+    for (let i = 0; i < val.frameCount; i++) {
+        let x = i * spriteWidth;
+        let y = ind * spriteHeight;
+        frames.loc.push({ x, y });
+    }
+    spriteAnimationList[val.name] = frames;
+});
+console.log(spriteAnimationList);
+
+// animation type
+const animationType = 'fall';
+
 
 // Function that contains all the animation code
 function animate() {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    let position = Math.floor(gameFrame / gameStagger) % dogFrameList[frameY];
-    frameX = spriteWidth * position;
-    ctx.drawImage(dogImg, frameX, frameY * spriteHeight, spriteWidth, spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    let position = Math.floor(gameFrame / gameStagger) % spriteAnimationList[animationType].loc.length;
+    let frameX = position * spriteWidth;
+    let frameY = spriteAnimationList[animationType].loc[0].y;
+    ctx.drawImage(dogImg, frameX, frameY, spriteWidth, spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     gameFrame++;
 
