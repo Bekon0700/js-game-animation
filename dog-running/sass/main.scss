@@ -7,3 +7,23 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.select-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+
+    select {
+        width: 15%;
+        padding: 8px 4px;
+        font-size: 18px;
+        text-transform: capitalize;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 700;
+        outline: none;
+        border: none;
+        border: 1px solid #ccc;
+    }
+}

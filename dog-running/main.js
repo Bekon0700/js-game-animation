@@ -5,6 +5,15 @@ const ctx = canvas.getContext('2d');
 const CANVAS_WIDTH = canvas.width = 600;
 const CANVAS_HEIGHT = canvas.height = 600;
 
+// animation type
+let animationType = 'idle';
+
+// get animation name
+const animationName = document.getElementById('animation-name')
+animationName.addEventListener('change', function(e) {
+    animationType = e.target.value;
+})
+
 // create image object
 const dogImg = new Image();
 dogImg.src = './shadow_dog.png';
@@ -73,10 +82,6 @@ dogFrameList.forEach((val, ind) => {
     }
     spriteAnimationList[val.name] = frames;
 });
-console.log(spriteAnimationList);
-
-// animation type
-const animationType = 'fall';
 
 
 // Function that contains all the animation code
